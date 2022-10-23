@@ -11,6 +11,7 @@ import { CheckoutComponent } from './components/form/checkout/checkout.component
 import { DetailComponent } from './components/product/detail/detail.component';
 import { ListComponent } from './components/product/list/list.component';
 import { ListItemComponent } from './components/product/list-item/list-item.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ListItemComponent } from './components/product/list-item/list-item.comp
     CheckoutComponent,
     DetailComponent,
     ListComponent,
-    ListItemComponent
+    ListItemComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
