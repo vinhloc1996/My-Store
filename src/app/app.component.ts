@@ -1,24 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ReadDataService } from './services/read-data.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
-
-  //pass data down to product list component
-  private _dataService: ReadDataService;
-  constructor(dataService: ReadDataService) {
-    this._dataService = dataService;
-  }
-
-  ngOnInit(): void {
-      
-  }
-  
+export class AppComponent {
   title = 'MyStore';
-
-
 }

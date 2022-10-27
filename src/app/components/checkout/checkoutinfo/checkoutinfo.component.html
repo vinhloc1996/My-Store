@@ -1,0 +1,65 @@
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-pull-6 col-sm-pull-6">
+  <form class="form-horizontal" #form="ngForm" (ngSubmit)="checkout()">
+    <div class="panel panel-info">
+      <div class="panel-heading">Shipping Address</div>
+      <div class="panel-body">
+        <div class="form-group">
+          <div class="col-md-12"><strong>Full Name:</strong></div>
+          <div class="col-md-12">
+            <input
+              type="text"
+              class="form-control"
+              name="fullname"
+              required
+              minlength="2"
+              [(ngModel)]="fullname" />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12"><strong>Address:</strong></div>
+          <div class="col-md-12">
+            <input
+              type="text"
+              name="address"
+              class="form-control"
+              required
+              minlength="10"
+              [(ngModel)]="address" />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12"><strong>Phone Number:</strong></div>
+          <div class="col-md-12">
+            <input
+              type="text"
+              name="phone"
+              class="form-control"
+              required
+              minlength="8"
+              [(ngModel)]="phone" />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12"><strong>Email Address:</strong></div>
+          <div class="col-md-12">
+            <input
+              type="email"
+              name="email"
+              required
+              minlength="4"
+              class="form-control"
+              [(ngModel)]="email" />
+          </div>
+        </div>
+        <div class="form-group">
+          <button
+            [disabled]="form.invalid"
+            type="submit"
+            class="btn btn-primary btn-block">
+            Place Order
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

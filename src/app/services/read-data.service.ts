@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
-import * as data from '../../assets/data.json';
+import jsonData from '../../assets/data.json';
 import { Product } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReadDataService {
-  private jsonData: Product[];
+  private data: Product[];
   constructor() {
-    this.jsonData = data;
+    this.data = jsonData;
   }
 
-  getData = () => this.jsonData;
+  getListProduct = (): Product[] => this.data;
+
+  getProductById = (id: number): Product | undefined => {
+    return this.data.find(x => x.id == id);
+  };
 }
