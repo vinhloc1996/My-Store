@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, filter, Observable } from 'rxjs';
 import jsonData from '../../assets/data.json';
 import { Product } from '../models/product.model';
 
@@ -6,14 +8,19 @@ import { Product } from '../models/product.model';
   providedIn: 'root',
 })
 export class ReadDataService {
-  private data: Product[];
-  constructor() {
-    this.data = jsonData;
-  }
+  products?: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
 
-  getListProduct = (): Product[] => this.data;
+  constructor(private http: HttpClient) {}
 
-  getProductById = (id: number): Product | undefined => {
-    return this.data.find(x => x.id == id);
+  getListProduct = (): BehaviorSubject<Product[]> | undefined => {
+    this.http
+      .get<Product[]>('http://localhost:4200/assets/data.json')
+      .subscribe(products => {
+        this.products?.next(products);
+      });
+    return this.products || undefined;
   };
+
+  getProductById = (id: number): Product | undefined =>
+    this.products?.getValue().find(p => p.id == id);
 }

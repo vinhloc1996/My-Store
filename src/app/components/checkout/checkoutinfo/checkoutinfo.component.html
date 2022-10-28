@@ -12,7 +12,11 @@
               name="fullname"
               required
               minlength="2"
-              [(ngModel)]="fullname" />
+              [(ngModel)]="fullname"
+              (ngModelChange)="validateFullName($event)" />
+          </div>
+          <div class="col-md-12" *ngIf="fullnameError">
+            <label>{{ fullnameError }}</label>
           </div>
         </div>
         <div class="form-group">
@@ -24,7 +28,11 @@
               class="form-control"
               required
               minlength="10"
-              [(ngModel)]="address" />
+              [(ngModel)]="address"
+              (ngModelChange)="validateAddress($event)" />
+          </div>
+          <div class="col-md-12" *ngIf="addressError">
+            <label>{{ addressError }}</label>
           </div>
         </div>
         <div class="form-group">
@@ -36,7 +44,11 @@
               class="form-control"
               required
               minlength="8"
-              [(ngModel)]="phone" />
+              [(ngModel)]="phone"
+              (ngModelChange)="validatePhone($event)" />
+          </div>
+          <div class="col-md-12" *ngIf="phoneError">
+            <label>{{ phoneError }}</label>
           </div>
         </div>
         <div class="form-group">
@@ -48,7 +60,11 @@
               required
               minlength="4"
               class="form-control"
-              [(ngModel)]="email" />
+              [(ngModel)]="email"
+              (ngModelChange)="validateEmail($event)" />
+          </div>
+          <div class="col-md-12" *ngIf="emailError">
+            <label>{{ emailError }}</label>
           </div>
         </div>
         <div class="form-group">

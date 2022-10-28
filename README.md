@@ -1,6 +1,26 @@
 # MyStore
 
-This project will build up a e-commerce store. It's not mainly focus on the UI but it's functional
+This project will build up a e-commerce store use Angular 14 as a Front-End framework. It's not mainly focus on the UI but it's functional. This could be a startup project to be a part of a full e-Commerce website.
+
+## Project structure
+  src
+  |app
+  |
+  |components 
+  |models
+  |services
+  |app-routing.module.ts
+  |app.component.*
+  |app.module.ts
+
+
+## Requirement system
+
+Machine must have the NodeJS version >=16
+
+## Installation
+
+Run `npm install` or `npm install --force` to install all modules need to run the project
 
 ## Development server
 

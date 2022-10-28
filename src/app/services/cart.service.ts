@@ -63,11 +63,11 @@ export class CartService {
   ) => {
     let currentCart: Cart = this.cartInfo.getValue();
     // let currentProductInCart: TotalProductPrice | undefined = currentCart.productList?.find(x => x.productId == productPrice.productId);
-    let currentProductInCart: number =
-      currentCart.productList.findIndex(
-        x => x.product.id == productPrice.product.id
-      ) || -1;
-
+    let currentProductInCart: number = currentCart.productList.findIndex(
+      x => x.product.id == productPrice.product.id
+    );
+    console.log(1, productPrice.product.id, currentCart);
+    console.log(2, currentProductInCart);
     if (productPrice.quantity == 0) {
       operation = CartOperation.Delete;
     }
@@ -75,24 +75,13 @@ export class CartService {
     switch (operation) {
       case CartOperation.AddUpdate:
         if (currentProductInCart > -1) {
-          //Subtract
-          currentCart.totalPrice -=
-            currentCart.productList[currentProductInCart].totalPrice;
-          currentCart.totalQty -=
-            currentCart.productList[currentProductInCart].quantity;
-          console.log(
-            `current data ${currentCart.productList[currentProductInCart]}`
-          );
-          //Replace
-          currentCart.productList[currentProductInCart] = productPrice;
-          console.log(
-            `new data ${currentCart.productList[currentProductInCart]}`
-          );
-          //Add
+          currentCart.productList[currentProductInCart].quantity +=
+            productPrice.quantity;
           currentCart.totalPrice += productPrice.totalPrice;
           currentCart.totalQty += productPrice.quantity;
-          console.log(`new cart ${currentCart}`);
-          alert(`Product ${currentCart.productList[currentProductInCart].product.name} has been updated in cart`)
+          alert(
+            `Product ${currentCart.productList[currentProductInCart].product.name} has been updated in cart`
+          );
           this.toastr.success(
             `Product ${currentCart.productList[currentProductInCart].product.name} has been updated in cart`,
             `Updated product`
@@ -101,7 +90,7 @@ export class CartService {
           currentCart.productList?.push(productPrice);
           currentCart.totalPrice += productPrice.totalPrice;
           currentCart.totalQty += productPrice.quantity;
-          alert(`Product ${productPrice.product.name} has been added to cart`)
+          alert(`Product ${productPrice.product.name} has been added to cart`);
           this.toastr.success(
             `Product ${productPrice.product.name} has been added to cart`,
             `Added product`
@@ -110,26 +99,27 @@ export class CartService {
         break;
       case CartOperation.Delete:
         if (currentProductInCart > -1) {
+          const name =
+            currentCart.productList[currentProductInCart].product.name;
           currentCart.totalPrice -=
             currentCart.productList[currentProductInCart].totalPrice;
+          currentCart.totalQty -=
+            currentCart.productList[currentProductInCart].quantity;
           currentCart.productList.splice(currentProductInCart, 1);
-          alert(`Product ${currentCart.productList[currentProductInCart].product.name} has been removed from cart`)
-          this.toastr.success(
-            `Product ${currentCart.productList[currentProductInCart].product.name} has been removed from cart`,
-            `Deleted product`
-          );
+          alert(`Product ${name} has been removed from cart`);
+          // this.toastr.success(
+          //   `Product ${currentCart.productList[currentProductInCart].product.name} has been removed from cart`,
+          //   `Deleted product`
+          // );
         }
         break;
     }
-    console.log(currentCart)
     this.cartInfo.next(currentCart);
   };
 
   updateCartInfo = (checkoutInfo: CheckoutInfo) => {
     let currentCart: Cart = this.cartInfo.getValue();
-    console.log(`current cart ${currentCart}`);
     currentCart.checkoutInfo = checkoutInfo;
-    console.log(`new cart ${currentCart}`);
     this.cartInfo.next(currentCart);
   };
 

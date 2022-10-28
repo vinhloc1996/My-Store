@@ -30,6 +30,11 @@ export class ListComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.products = this._dataService.getListProduct();
+    this._dataService.getListProduct()?.subscribe(products => {
+      if (!products) {
+        return;
+      }
+      this.products = products;
+    });
   }
 }

@@ -15,6 +15,11 @@ export class CheckoutinfoComponent {
   email?: string;
   phone?: string;
 
+  addressError?: string;
+  fullnameError?: string;
+  emailError?: string;
+  phoneError?: string;
+
   checkout = () => {
     this.placeOrder.emit({
       address: this.address,
@@ -22,5 +27,53 @@ export class CheckoutinfoComponent {
       fullname: this.fullname,
       phone: this.phone,
     });
+  };
+
+  validateFullName = (fullname: string) => {
+    if (!fullname) {
+      this.fullnameError = 'FullName is required';
+      return;
+    }
+    if (fullname.length < 2) {
+      this.fullnameError = 'FullName is required atleast 2 characters';
+      return;
+    }
+    this.fullnameError = '';
+  };
+
+  validateAddress = (address: string) => {
+    if (!address) {
+      this.addressError = 'Address is required';
+      return;
+    }
+    if (address.length < 10) {
+      this.addressError = 'Address is required atleast 10 characters';
+      return;
+    }
+    this.addressError = '';
+  };
+
+  validatePhone = (phone: string) => {
+    if (!phone) {
+      this.phoneError = 'Phone is required';
+      return;
+    }
+    if (phone.length < 2) {
+      this.phoneError = 'Phone is required atleast 8 characters';
+      return;
+    }
+    this.phoneError = '';
+  };
+
+  validateEmail = (email: string) => {
+    if (!email) {
+      this.emailError = 'Email is required';
+      return;
+    }
+    if (email.length < 4) {
+      this.emailError = 'Email is required atleast 4 characters';
+      return;
+    }
+    this.emailError = '';
   };
 }
