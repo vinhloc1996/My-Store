@@ -58,8 +58,14 @@ export class CheckoutinfoComponent {
       this.phoneError = 'Phone is required';
       return;
     }
-    if (phone.length < 2) {
+    if (phone.length < 8) {
       this.phoneError = 'Phone is required atleast 8 characters';
+      return;
+    }
+    var reg = new RegExp('^[0-9]{8,15}$');
+    if (!reg.test(phone)) {
+      this.phoneError =
+        'Phone must contain only number and length between 8 to 15 ';
       return;
     }
     this.phoneError = '';
@@ -72,6 +78,11 @@ export class CheckoutinfoComponent {
     }
     if (email.length < 4) {
       this.emailError = 'Email is required atleast 4 characters';
+      return;
+    }
+    var reg = new RegExp('^\\S+@\\S+$');
+    if (!reg.test(email)) {
+      this.emailError = 'Email must contain @';
       return;
     }
     this.emailError = '';

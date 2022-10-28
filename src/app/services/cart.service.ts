@@ -66,8 +66,6 @@ export class CartService {
     let currentProductInCart: number = currentCart.productList.findIndex(
       x => x.product.id == productPrice.product.id
     );
-    console.log(1, productPrice.product.id, currentCart);
-    console.log(2, currentProductInCart);
     if (productPrice.quantity == 0) {
       operation = CartOperation.Delete;
     }
@@ -77,24 +75,26 @@ export class CartService {
         if (currentProductInCart > -1) {
           currentCart.productList[currentProductInCart].quantity +=
             productPrice.quantity;
+          currentCart.productList[currentProductInCart].totalPrice +=
+            productPrice.totalPrice;
           currentCart.totalPrice += productPrice.totalPrice;
           currentCart.totalQty += productPrice.quantity;
           alert(
             `Product ${currentCart.productList[currentProductInCart].product.name} has been updated in cart`
           );
-          this.toastr.success(
-            `Product ${currentCart.productList[currentProductInCart].product.name} has been updated in cart`,
-            `Updated product`
-          );
+          // this.toastr.success(
+          //   `Product ${currentCart.productList[currentProductInCart].product.name} has been updated in cart`,
+          //   `Updated product`
+          // );
         } else {
           currentCart.productList?.push(productPrice);
           currentCart.totalPrice += productPrice.totalPrice;
           currentCart.totalQty += productPrice.quantity;
           alert(`Product ${productPrice.product.name} has been added to cart`);
-          this.toastr.success(
-            `Product ${productPrice.product.name} has been added to cart`,
-            `Added product`
-          );
+          // this.toastr.success(
+          //   `Product ${productPrice.product.name} has been added to cart`,
+          //   `Added product`
+          // );
         }
         break;
       case CartOperation.Delete:
